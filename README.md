@@ -109,6 +109,20 @@ Recognized: “move forward” → Wheelchair moves forward
 Unknown audio → System prompts to repeat
 
 Misclassified command → Graceful error handling
+## 🖥️ Simulation Screenshots
+
+### Move Forward
+![Move Forward](images/simulation_move_forward.png)
+
+### Turn Left
+![Turn Left](images/simulation_turn_left.png)
+
+### Unknown Command Handling
+![Unknown Command](images/unknown_command.png)
+
+### Model Accuracy
+![Model Accuracy](images/model_accuracy.png)
+
 
 🔗 Live Edge Impulse Project
 
