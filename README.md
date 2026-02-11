@@ -1,23 +1,25 @@
-🎙️ Voice Operated Smart Wheelchair (Edge AI + TensorFlow Lite)
+🎙️ Voice-Controlled Smart Wheelchair using Edge AI & TensorFlow Lite
 🚀 Overview
 
-This project presents an end-to-end speech recognition pipeline for a voice-controlled smart wheelchair simulation.
+This project presents an end-to-end speech recognition pipeline for a voice-operated smart wheelchair simulation. The system recognizes five navigation commands using a trained neural network model and controls a virtual wheelchair in real time.
 
-The system recognizes five navigation commands and controls a virtual wheelchair in real time using a lightweight TensorFlow Lite model optimized for edge deployment.
+The model was developed using Edge Impulse and deployed as a quantized TensorFlow Lite (int8) model optimized for low-latency edge inference.
 
 This project demonstrates:
 
 Dataset collection & labeling
 
-Audio preprocessing using MFCC
+MFCC-based audio preprocessing
 
-Neural network training using Edge Impulse
+Neural network training & evaluation
 
-Quantized TensorFlow Lite deployment
+Model quantization & edge deployment
 
-Real-time Python simulation using PyGame
+Real-time inference integration in Python
 
-🎯 Supported Commands
+Simulation control using PyGame
+
+🎯 Supported Voice Commands
 
 Move Forward
 
@@ -41,19 +43,21 @@ Sample Length: 1 second
 
 Classes: 5
 
-Audio was collected and labeled using Edge Impulse Studio, along with additional public speech datasets.
+Voice data was collected and labeled using Edge Impulse Studio and structured for supervised training.
 
 🧠 Model Architecture
 
-Input: MFCC features (extracted from 16kHz audio)
+Feature Extraction: MFCC (Mel-Frequency Cepstral Coefficients)
 
 Model Type: Fully Connected Neural Network
 
-Output: Softmax (5 classes)
+Output Layer: Softmax (5 classes)
+
+Train/Test Split: 80/20
 
 Deployment Format: Quantized TensorFlow Lite (int8)
 
-The model was trained using an 80/20 train-test split.
+The model was optimized for edge deployment to ensure low memory usage and fast inference.
 
 📈 Model Performance
 Metric	Value
@@ -64,58 +68,53 @@ Peak RAM Usage	19.8 KB
 Flash Usage	33.9 KB
 Quantization	int8
 
-The model was optimized for low-latency edge deployment.
+The validation-test accuracy gap indicates minor overfitting due to dataset size and environmental variability. Future improvements include dataset augmentation and noise injection.
 
 ⚡ Edge Deployment Details
 
-Framework: TensorFlow Lite
+Platform: TensorFlow Lite
 
-Quantization: int8
+Quantized Model: int8
 
-Real-time inference achieved with ~20ms latency
+Real-time inference latency: ~20ms
 
-Suitable for microcontroller-based deployment
+Suitable for microcontroller-based systems
 
-🖥️ Simulation Pipeline
+The model was designed to be lightweight and efficient for real-world assistive technology deployment.
 
-Voice captured using PyAudio
+🖥️ Real-Time Simulation Pipeline
+
+Audio captured using PyAudio
 
 Audio converted into MFCC features
 
 Features passed into TFLite interpreter
 
-Predicted command returned
+Model predicts command
 
-PyGame simulation updates wheelchair movement
+PyGame updates wheelchair movement accordingly
 
-🧪 Screenshots
-📁 Dataset Summary
+Unknown or unclear commands handled gracefully
 
-📊 Model Accuracy
+🧪 Simulation Output
 
-⚡ Edge Performance
+The system performs real-time recognition and updates the wheelchair simulation dynamically.
 
-🖥️ Simulation Output
+Examples:
 
-⚠️ Observations & Challenges
+Recognized: “turn left” → Wheelchair rotates left
 
-Slight overfitting observed (validation > test accuracy)
+Recognized: “move forward” → Wheelchair moves forward
 
-Accuracy decreases in noisy environments
+Unknown audio → System prompts to repeat
 
-Similar-sounding commands cause occasional misclassification
+Misclassified command → Graceful error handling
 
-🔮 Future Improvements
+🔗 Live Edge Impulse Project
 
-Data augmentation (noise injection)
+Full training pipeline, dataset configuration, and deployment details:
 
-CNN-based architecture for improved speech recognition
-
-Real hardware integration (microcontroller + motor control)
-
-Multi-language support
-
-Adaptive learning for user-specific voice tuning
+👉 https://studio.edgeimpulse.com/public/657394/live
 
 🛠️ Tech Stack
 
@@ -130,6 +129,18 @@ PyAudio
 PyGame
 
 NumPy / SciPy
+
+🔮 Future Improvements
+
+CNN-based speech classification
+
+Noise augmentation for better generalization
+
+Hardware integration (microcontroller + motor control)
+
+Multi-language support
+
+Adaptive user-specific voice tuning
 
 👨‍💻 Author
 
