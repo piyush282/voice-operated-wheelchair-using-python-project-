@@ -111,17 +111,16 @@ Unknown audio → System prompts to repeat
 Misclassified command → Graceful error handling
 ## 🖥️ Simulation Screenshots
 
-### Move Forward
-![Move Forward](images/simulation_move_forward.png)
+<p align="center">
+  <img src="images/simulation_move_forward.png" width="45%">
+  <img src="images/simulation_move_backward.png" width="45%">
+</p>
 
-### Turn Left
-![Turn Left](images/simulation_turn_left.png)
+<p align="center">
+  <img src="images/simulation_turn_left.png" width="45%">
+  <img src="images/simulation_turn_right.png" width="45%">
+</p>
 
-### Unknown Command Handling
-![Unknown Command](images/unknown_command.png)
-
-### Model Accuracy
-![Model Accuracy](images/model_accuracy.png)
 
 
 🔗 Live Edge Impulse Project
