@@ -1,188 +1,137 @@
-# voice-operated-wheelchair-using-python-project-
-# Voice Operated Smart Wheelchair (Machine Learning Based Simulation)
+🎙️ Voice Operated Smart Wheelchair (Edge AI + TensorFlow Lite)
+🚀 Overview
 
-## 📌 Project Overview
+This project presents an end-to-end speech recognition pipeline for a voice-controlled smart wheelchair simulation.
 
-This project presents a **software-based voice operated smart wheelchair system** developed using machine learning and speech recognition techniques. The system recognizes basic voice commands and controls a simulated wheelchair in real time. It is designed as a low-cost assistive technology solution for individuals with mobility impairments.
+The system recognizes five navigation commands and controls a virtual wheelchair in real time using a lightweight TensorFlow Lite model optimized for edge deployment.
 
-The project uses:
+This project demonstrates:
 
-* **Edge Impulse** for training the speech recognition model
-* **TensorFlow Lite** for lightweight model deployment
-* **Python** for simulation and testing
-* **PyGame** for visualizing wheelchair movement
-* **MFCC (Mel-Frequency Cepstral Coefficients)** for speech feature extraction
+Dataset collection & labeling
 
----
+Audio preprocessing using MFCC
 
-## 🎯 Objectives
+Neural network training using Edge Impulse
 
-* Develop a voice-controlled navigation system for wheelchair movement
-* Train a machine learning model to recognize basic voice commands
-* Simulate wheelchair movement using Python without hardware
-* Evaluate performance in noisy and clean environments
+Quantized TensorFlow Lite deployment
 
----
+Real-time Python simulation using PyGame
 
-## 🧠 Features
+🎯 Supported Commands
 
-* Real-time voice command recognition
-* Supports five basic commands:
+Move Forward
 
-  * Move Forward
-  * Move Backward
-  * Turn Left
-  * Turn Right
-  * Stop
-* Visual wheelchair movement using PyGame
-* Noise reduction using MFCC features
-* Lightweight deployment using TensorFlow Lite
+Move Backward
 
----
+Turn Left
 
-## 🛠️ Technologies Used
+Turn Right
 
-* **Python 3.x**
-* **TensorFlow Lite**
-* **Edge Impulse**
-* **PyAudio** (for microphone input)
-* **PyGame** (for simulation visualization)
-* **NumPy / SciPy** (audio processing)
+Stop
 
----
+📊 Dataset Details
 
-## 📂 Project Structure
+Total Samples: 1,478
 
-```
-voice-smart-wheelchair/
-│
-├── model/
-│   └── voice_model.tflite        # Trained TensorFlow Lite model
-│
-├── data/
-│   └── samples/                 # Voice command samples
-│
-├── simulation/
-│   ├── main.py                  # Main simulation script
-│   ├── audio_input.py           # Voice recording using PyAudio
-│   ├── mfcc_extraction.py       # Feature extraction
-│   └── pygame_display.py        # Wheelchair visualization
-│
-├── requirements.txt             # Python dependencies
-├── README.md                    # Project documentation
-└── report.pdf                   # Research paper (optional)
-```
+Total Audio Duration: 26 minutes 18 seconds
 
----
+Sampling Rate: 16 kHz
 
-## ⚙️ Installation & Setup
+Sample Length: 1 second
 
-### 1. Clone the repository
+Classes: 5
 
-```
-git clone https://github.com/your-username/voice-smart-wheelchair.git
-cd voice-smart-wheelchair
-```
+Audio was collected and labeled using Edge Impulse Studio, along with additional public speech datasets.
 
-### 2. Install dependencies
+🧠 Model Architecture
 
-```
-pip install -r requirements.txt
-```
+Input: MFCC features (extracted from 16kHz audio)
 
-### 3. Connect microphone
+Model Type: Fully Connected Neural Network
 
-Ensure a working microphone is connected for voice input.
+Output: Softmax (5 classes)
 
----
+Deployment Format: Quantized TensorFlow Lite (int8)
 
-## ▶️ How to Run the Simulation
+The model was trained using an 80/20 train-test split.
 
-```
-python simulation/main.py
-```
+📈 Model Performance
+Metric	Value
+Validation Accuracy	89.4%
+Test Accuracy	78.2%
+Inference Latency	20 ms
+Peak RAM Usage	19.8 KB
+Flash Usage	33.9 KB
+Quantization	int8
 
-Steps during execution:
+The model was optimized for low-latency edge deployment.
 
-1. Speak one of the supported commands
-2. Audio is recorded using PyAudio
-3. MFCC features are extracted
-4. TensorFlow Lite model predicts the command
-5. PyGame displays wheelchair movement
+⚡ Edge Deployment Details
 
----
+Framework: TensorFlow Lite
 
-## 📊 Model Training Details
+Quantization: int8
 
-* Dataset:
+Real-time inference achieved with ~20ms latency
 
-  * Google Speech Commands Dataset
-  * Custom voice samples collected using Edge Impulse
+Suitable for microcontroller-based deployment
 
-* Preprocessing:
+🖥️ Simulation Pipeline
 
-  * MFCC feature extraction
+Voice captured using PyAudio
 
-* Model:
+Audio converted into MFCC features
 
-  * Neural Network Classifier
+Features passed into TFLite interpreter
 
-* Train/Test Split:
+Predicted command returned
 
-  * 80% Training
-  * 20% Testing
+PyGame simulation updates wheelchair movement
 
-* Achieved Accuracy:
+🧪 Screenshots
+📁 Dataset Summary
 
-  * ~79% in simulated environment
+📊 Model Accuracy
 
----
+⚡ Edge Performance
 
-## 🧪 Testing
+🖥️ Simulation Output
 
-* Tested under:
+⚠️ Observations & Challenges
 
-  * Quiet environments
-  * Background noise conditions
+Slight overfitting observed (validation > test accuracy)
 
-Observations:
+Accuracy decreases in noisy environments
 
-* Accuracy decreases in noisy environments
-* Misclassification occurs for similar-sounding commands
-* Latency increases slightly with continuous input
+Similar-sounding commands cause occasional misclassification
 
----
+🔮 Future Improvements
 
-## 🚀 Future Improvements
+Data augmentation (noise injection)
 
-* Integrate with real wheelchair hardware (motors, microcontroller)
-* Add advanced noise cancellation techniques
-* Improve model accuracy with more training data
-* Add obstacle detection using sensors (LIDAR, ultrasonic)
-* Support multiple languages and accents
+CNN-based architecture for improved speech recognition
 
----
+Real hardware integration (microcontroller + motor control)
 
-## 👨‍💻 Author
+Multi-language support
 
-**Piyush Saini**
-MCA Student | Machine Learning & Assistive Technology Enthusiast
+Adaptive learning for user-specific voice tuning
 
----
+🛠️ Tech Stack
 
-## 📜 License
+Python
 
-This project is for educational and research purposes only.
+Edge Impulse
 
----
+TensorFlow Lite
 
-## 🤝 Acknowledgements
+PyAudio
 
-* Edge Impulse Team
-* TensorFlow Lite Community
-* Google Speech Commands Dataset
-* PyGame Developers
+PyGame
 
----
+NumPy / SciPy
 
-If you find this project useful, feel free to ⭐ the repository and contribute!
+👨‍💻 Author
+
+Piyush Saini
+MCA | AI/ML Enthusiast | Edge AI Developer
