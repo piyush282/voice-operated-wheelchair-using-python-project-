@@ -3,7 +3,7 @@
 
 This project presents an end-to-end speech recognition pipeline for a voice-operated smart wheelchair simulation. The system recognizes five navigation commands using a trained neural network model and controls a virtual wheelchair in real time.
 
-The model was developed using Edge Impulse and deployed as a quantized TensorFlow Lite (int8) model optimized for low-latency edge inference.
+The model was developed using Edge Impulse and deployed as a quantized TensorFlow Lite (int8) model optimized for low-latency edge inference (~20ms).
 
 This project demonstrates:
 
@@ -43,21 +43,52 @@ Sample Length: 1 second
 
 Classes: 5
 
-Voice data was collected and labeled using Edge Impulse Studio and structured for supervised training.
+Train/Test Split: 80/20
 
-🧠 Model Architecture
+Why 16kHz?
 
-Feature Extraction: MFCC (Mel-Frequency Cepstral Coefficients)
+16kHz is a standard sampling rate for speech recognition systems. It preserves essential speech frequency components (up to 8kHz) while reducing computational complexity compared to 44.1kHz audio.
+
+🧠 Feature Extraction
+MFCC (Mel-Frequency Cepstral Coefficients)
+
+Number of coefficients: 40
+
+Window size: ~30ms
+
+Frame overlap applied
+
+Converts time-domain audio into frequency-domain features
+
+Mimics human auditory perception
+
+Reduces dimensionality while preserving speech-relevant information
+
+MFCC was chosen instead of raw waveform input to improve classification performance and reduce model complexity.
+
+🏗 Model Architecture
 
 Model Type: Fully Connected Neural Network
 
-Output Layer: Softmax (5 classes)
+Input: MFCC feature vector
 
-Train/Test Split: 80/20
+Output Layer: Softmax (5 classes)
 
 Deployment Format: Quantized TensorFlow Lite (int8)
 
-The model was optimized for edge deployment to ensure low memory usage and fast inference.
+Why Fully Connected Instead of CNN?
+
+A fully connected network was selected due to:
+
+Small dataset size (1,478 samples)
+
+Lower computational requirements
+
+Faster training and inference
+
+Suitability for edge deployment
+
+CNN-based architectures can improve robustness but require larger datasets and higher compute resources.
 
 📈 Model Performance
 Metric	Value
@@ -67,8 +98,17 @@ Inference Latency	20 ms
 Peak RAM Usage	19.8 KB
 Flash Usage	33.9 KB
 Quantization	int8
+Performance Analysis
 
-The validation-test accuracy gap indicates minor overfitting due to dataset size and environmental variability. Future improvements include dataset augmentation and noise injection.
+The validation-test accuracy gap indicates minor overfitting due to:
+
+Limited dataset diversity
+
+Environmental noise variations
+
+Similar-sounding commands
+
+Future improvements include noise augmentation and dataset expansion to improve generalization.
 
 ⚡ Edge Deployment Details
 
@@ -78,11 +118,11 @@ Quantized Model: int8
 
 Real-time inference latency: ~20ms
 
-Suitable for microcontroller-based systems
+Optimized for microcontroller-based systems
 
-The model was designed to be lightweight and efficient for real-world assistive technology deployment.
+The model is lightweight and suitable for real-world assistive technology deployment.
 
-🖥️ Real-Time Simulation Pipeline
+🔄 Real-Time Simulation Pipeline
 
 Audio captured using PyAudio
 
@@ -92,44 +132,38 @@ Features passed into TFLite interpreter
 
 Model predicts command
 
-PyGame updates wheelchair movement accordingly
+PyGame updates wheelchair movement
 
 Unknown or unclear commands handled gracefully
 
-🧪 Simulation Output
+🖥️ Simulation Screenshots
+🔹 Move Forward Detection
 
-The system performs real-time recognition and updates the wheelchair simulation dynamically.
+Model correctly recognizes the command and updates movement in real time.
 
-Examples:
+<img src="images/simulation_move_forward.png" width="600">
+🔹 Move Backward Detection
 
-Recognized: “turn left” → Wheelchair rotates left
+Demonstrates stable inference and command execution.
 
-Recognized: “move forward” → Wheelchair moves forward
+<img src="images/simulation_move_backward.png" width="600">
+🔹 Turn Left Recognition
 
-Unknown audio → System prompts to repeat
+Correct directional control based on voice input.
 
-Misclassified command → Graceful error handling
-## 🖥️ Simulation Screenshots
+<img src="images/simulation_turn_left.png" width="600">
+🔹 Turn Right Recognition
 
-<p align="center">
-  <img src="images/simulation_move_forward.png" width="45%">
-  <img src="images/simulation_move_backward.png" width="45%">
-</p>
+Low-latency response during real-time simulation.
 
-<p align="center">
-  <img src="images/simulation_turn_left.png" width="45%">
-  <img src="images/simulation_turn_right.png" width="45%">
-</p>
-
-
-
+<img src="images/simulation_turn_right.png" width="600">
 🔗 Live Edge Impulse Project
 
 Full training pipeline, dataset configuration, and deployment details:
 
 👉 https://studio.edgeimpulse.com/public/657394/live
 
-🛠️ Tech Stack
+🛠 Tech Stack
 
 Python
 
